@@ -99,6 +99,7 @@ in
     extraGroups = [
       "networkmanager"
       "wheel"
+      "kvm"
     ];
     shell = pkgs.zsh;
   };
@@ -114,6 +115,7 @@ in
   environment.systemPackages = with pkgs; [
     vscode
     codex
+    android-tools
   ];
 
   # Experimental features

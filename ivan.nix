@@ -14,6 +14,10 @@ in
   home.homeDirectory = "/home/ivan";
   home.stateVersion = "26.05";
 
+  home.sessionVariables = {
+    DIRENV_LOG_FORMAT = "";
+  };
+
   home.packages = with pkgs; [
     git
     htop
@@ -23,6 +27,7 @@ in
     nixfmt # Formatter for .nix files
     gnome-terminal
     openscad
+    devenv
   ];
 
   home.shellAliases = {
@@ -78,6 +83,12 @@ in
         last = "log -1 HEAD";
       };
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    silent = true;
   };
 
   programs.emacs = {
