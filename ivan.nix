@@ -10,6 +10,8 @@ let
   terminalProfile = "b1dcc9dd-5262-4d8d-a863-c897e6d979b9";
 in
 {
+  nixpkgs.config.allowUnfree = true;
+
   home.username = "ivan";
   home.homeDirectory = "/home/ivan";
   home.stateVersion = "26.05";
@@ -28,6 +30,7 @@ in
     gnome-terminal
     openscad
     devenv
+    bambu-studio
   ];
 
   home.shellAliases = {
@@ -89,6 +92,22 @@ in
     enable = true;
     nix-direnv.enable = true;
     silent = true;
+  };
+
+  programs.firefox = {
+    enable = true;
+    profiles = {
+      default = {
+        # Reuse the existing Firefox profile so bookmarks and history are kept.
+        path = "elni79cd.default";
+        settings = {
+          # Reduces the maximum number of concurrent content processes
+          "dom.ipc.processCount" = 4;
+          # If you want to aggressively group tabs (disables some site isolation protections)
+          "fission.autostart" = false;
+        };
+      };
+    };
   };
 
   programs.emacs = {
